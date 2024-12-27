@@ -12,6 +12,10 @@ interface BlockProps {
     onClick?: () => void
 }
 
+interface ViewProps {
+    setGameState: (state: GameState) => void
+}
+
 function Block({isSmile, onClick}: BlockProps) {
     return (
         <div
@@ -22,7 +26,7 @@ function Block({isSmile, onClick}: BlockProps) {
     )
 }
 
-function StartView({setGameState}) {
+function StartView({setGameState}: ViewProps) {
     return (
         <div>
             <button onClick={() => setGameState(GameState.STARTED)}>Start</button>
@@ -30,7 +34,7 @@ function StartView({setGameState}) {
     )
 }
 
-function GameView({setGameState}) {
+function GameView({setGameState}: ViewProps) {
     const blocks = Array(9).fill(false)
     const faceIndex = Math.floor(Math.random() * blocks.length)
     blocks[faceIndex] = true
@@ -47,7 +51,7 @@ function GameView({setGameState}) {
     )
 }
 
-function ResultsView({setGameState}) {
+function ResultsView({setGameState}: ViewProps) {
     return (
         <div className="p-5 border-2 flex flex-col gap-2">
             <h2>Game Over!</h2>
