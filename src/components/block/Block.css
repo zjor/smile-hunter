@@ -1,0 +1,15 @@
+.block {
+    @apply w-[96px] h-[96px] bg-amber-300 flex items-center justify-center rounded-2xl cursor-pointer
+}
+
+.invalid {
+    animation: shake 0.3s ease-in-out 0s 2; /* Shake for 0.3 seconds, 3 times */
+}
+
+@keyframes shake {
+    0% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-4px) rotate(-2deg); }
+    50% { transform: translateX(4px) rotate(2deg); }
+    75% { transform: translateX(-4px) rotate(-2deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
