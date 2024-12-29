@@ -1,0 +1,4 @@
+.title {
+    @apply text-6xl font-bold font-chewy fill-cyan-600;
+    text-shadow: -2px -2px 0 #155e75, 2px -2px 0 #155e75, -2px 2px 0 #155e75, 2px 2px 0 #155e75;
+}

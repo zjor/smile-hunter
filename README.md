@@ -11,3 +11,5 @@
 - add about section
 - add reference to github
 - add donate button URL
+- allow user to config more rounds
+- better faces design

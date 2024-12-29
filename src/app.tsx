@@ -1,6 +1,6 @@
 import './app.css'
 import {useState} from "preact/hooks";
-import {StartView} from "./views/StartView.tsx";
+import {StartView} from "./views/start-view/StartView.tsx";
 import {GameView} from "./views/GameView.tsx";
 import {ResultsView} from "./views/ResultsView.tsx";
 
