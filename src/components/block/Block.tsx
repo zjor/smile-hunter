@@ -2,11 +2,12 @@ import "./Block.css"
 import {useState} from "preact/hooks";
 
 export interface BlockProps {
+    url: string
     correct: boolean
     onClick?: () => void
 }
 
-export function Block({correct, onClick}: BlockProps) {
+export function Block({url, correct, onClick}: BlockProps) {
     const [isShaking, setShaking] = useState(false)
     const _onClick = () => {
         if (!correct) {
@@ -20,7 +21,7 @@ export function Block({correct, onClick}: BlockProps) {
         <div
             className={`block ${isShaking ? 'invalid' : ''}`}
             onClick={_onClick}>
-            {correct ? '\u{1F60A}' : '\u{2205}'}
+            <img src={url}/>
         </div>
     )
 }
