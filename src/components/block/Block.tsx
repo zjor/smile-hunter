@@ -1,8 +1,9 @@
+import questionImage from "../../assets/question.png"
 import "./Block.css"
 import {useState} from "preact/hooks";
 
 export interface BlockProps {
-    url: string
+    url: string | undefined
     correct: boolean
     onClick?: () => void
 }
@@ -21,7 +22,7 @@ export function Block({url, correct, onClick}: BlockProps) {
         <div
             className={`block ${isShaking ? 'invalid' : ''}`}
             onClick={_onClick}>
-            <img src={url}/>
+            <img src={url || questionImage}/>
         </div>
     )
 }

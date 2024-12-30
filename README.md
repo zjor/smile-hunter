@@ -2,6 +2,8 @@
 
 ## TODO
 - load images asynchronously before the round start
+  - modal dialog window, blur background
+  - https://stackoverflow.com/questions/2342132/waiting-for-image-to-load-in-javascript
 - improve screen splash design
 - track total face picking time
 - track precision

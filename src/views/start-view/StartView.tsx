@@ -1,6 +1,7 @@
 import {GameState, ViewProps} from "../../app.tsx";
 import "./StartView.css"
 
+
 export function StartView({setGameState}: ViewProps) {
     return (
         <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
@@ -17,8 +18,9 @@ export function StartView({setGameState}: ViewProps) {
             <img className="w-[256] h-[256px] mb-[48px] rounded-2xl"
                  src="https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/smile-hunter-splash.png"/>
             <button
-            className="bg-cyan-700 text-2xl text-white font-bold w-[256px]"
-                onClick={() => setGameState(GameState.STARTED)}>Start</button>
+                className="bg-cyan-700 text-2xl text-white font-bold w-[256px]"
+                onClick={() => setGameState(GameState.STARTED)}>Start
+            </button>
         </div>
     )
 }
