@@ -1,7 +1,7 @@
 import {GameState, ViewProps} from "../app.tsx";
 import {Block} from "../components/block/Block.tsx";
 import {PaginationDots} from "../components/pagination-dots/PaginationDots.tsx";
-import {useCallback, useState} from "preact/hooks";
+import {useEffect, useState} from "preact/hooks";
 import {range, shuffle} from "../utils/math.ts";
 import {LoadingDialog} from "../components/loading-dialog/LoadingDialog.tsx";
 
@@ -30,43 +30,45 @@ function generateRound() {
 }
 
 export function GameView({setGameState}: ViewProps) {
-    const [round, setRound] = useState({
-        number: 1,
+    const [roundNumber, setRoundNumber] = useState<number>(1)
+    const [faces, setFaces] = useState({
         images: generateRound(),
         loading: true
     });
 
-    const preLoadImages = useCallback(async () => {
-        for (let img of round.images) {
-            const i = new Image()
-            i.src = img.url
-            await i.decode()
-            img.loaded = true
+    useEffect(() => {
+        const fetchImages = async () => {
+            const promises = faces.images.map(async (image) => {
+                const i = new Image()
+                i.src = image.url
+                await i.decode()
+                image.loaded = true
+            })
+            await Promise.all(promises)
+            setFaces({...faces, ...{loading: false}})
         }
-        setRound({...round, ...{loading: false}})
-    }, [round]);
-    preLoadImages().catch(console.log)
-    console.log('Round number: ', round.number)
+        fetchImages().catch(console.log)
+    }, [roundNumber]);
 
     const _onClick = (correct: boolean) => {
         if (correct) {
-            if (round.number == totalRounds) {
+            if (roundNumber == totalRounds) {
                 setGameState(GameState.FINISHED)
             } else {
-                setRound({
-                    number: round.number + 1,
+                setFaces({
                     images: generateRound(),
                     loading: true
                 })
+                setRoundNumber(roundNumber + 1)
             }
         }
     }
 
     return (
         <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
-            {round.loading && <LoadingDialog/>}
+            {faces.loading && <LoadingDialog/>}
             <div className="grid grid-cols-3 gap-2">
-                {round.images.map(({url, isSmiling, loaded}) => (
+                {faces.images.map(({url, isSmiling, loaded}) => (
                     <Block
                         url={loaded ? url : undefined}
                         correct={isSmiling}
@@ -75,7 +77,7 @@ export function GameView({setGameState}: ViewProps) {
                 ))}
             </div>
             <div className="pt-10">
-                <PaginationDots total={totalRounds} filled={round.number}/>
+                <PaginationDots total={totalRounds} filled={roundNumber}/>
             </div>
         </div>
     )

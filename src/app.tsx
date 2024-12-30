@@ -17,10 +17,6 @@ export interface ViewProps {
 export function App() {
     const [gameState, setGameState] = useState<GameState>(GameState.NOT_STARTED)
 
-    const blocks = Array(9).fill(false)
-    const faceIndex = Math.floor(Math.random() * blocks.length)
-    blocks[faceIndex] = true
-
     return (
         <>
             {gameState == GameState.NOT_STARTED && <StartView setGameState={setGameState}/>}
