@@ -19,50 +19,58 @@ const FACE_URLS = {
     smiling: getFaceUrls(10, true),
 }
 
-function generateRound() {
-    const normal = shuffle(range(0, 23)).slice(0, 8).map(ix => ({url: FACE_URLS.normal[ix], isSmiling: false, loaded: false}))
+interface Face {
+    url: string
+    isSmiling: boolean
+}
+
+function generateRound(): Face[] {
+    const normal = shuffle(range(0, 23)).slice(0, 8).map(ix => ({
+        url: FACE_URLS.normal[ix],
+        isSmiling: false
+    }))
     const smile = {
         url: FACE_URLS.smiling[shuffle(range(0, 10))[0]],
-        isSmiling: true,
-        loaded: false
+        isSmiling: true
     }
-    return shuffle([...normal, ...[smile]])
+    return shuffle([...normal, ...[smile]]) as Face[]
+}
+
+function generateGame(rounds: number): Face[][] {
+    return Array.from({length: rounds}).map(_ => generateRound());
 }
 
 export function GameView({setGameState}: ViewProps) {
     const [roundNumber, setRoundNumber] = useState<number>(1)
     const [loadingProgress, setLoadingProgress] = useState<number>(0)
-    const [faces, setFaces] = useState({
-        images: generateRound(),
-        loading: true
+    const [game, setGame] = useState({
+        rounds: generateGame(3),
+        loading: false
     });
 
     useEffect(() => {
         const fetchImages = async () => {
+            setGame({...game, ...{loading: true}})
+            const allFaces = game.rounds.flatMap(it => it)
             let loadedCount = 0
-            const promises = faces.images.map(async (image) => {
+            const promises = allFaces.map(async (face: Face) => {
                 const i = new Image()
-                i.src = image.url
+                i.src = face.url
                 await i.decode()
-                image.loaded = true
                 loadedCount++
-                setLoadingProgress(loadedCount / faces.images.length * 100)
+                setLoadingProgress(loadedCount / allFaces.length * 100)
             })
             await Promise.all(promises)
-            setFaces({...faces, ...{loading: false}})
+            setGame({...game, ...{loading: false}})
         }
         fetchImages().catch(console.log)
-    }, [roundNumber]);
+    }, []);
 
     const _onClick = (correct: boolean) => {
         if (correct) {
             if (roundNumber == totalRounds) {
                 setGameState(GameState.FINISHED)
             } else {
-                setFaces({
-                    images: generateRound(),
-                    loading: true
-                })
                 setRoundNumber(roundNumber + 1)
             }
         }
@@ -70,11 +78,11 @@ export function GameView({setGameState}: ViewProps) {
 
     return (
         <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
-            {faces.loading && <LoadingDialog progress={loadingProgress}/>}
+            {game.loading && <LoadingDialog progress={loadingProgress}/>}
             <div className="grid grid-cols-3 gap-2">
-                {faces.images.map(({url, isSmiling, loaded}) => (
+                {game.rounds[roundNumber - 1].map(({url, isSmiling}) => (
                     <Block
-                        url={loaded ? url : undefined}
+                        url={game.loading ? undefined : url}
                         correct={isSmiling}
                         onClick={() => _onClick(isSmiling)}
                     />
