@@ -31,6 +31,7 @@ function generateRound() {
 
 export function GameView({setGameState}: ViewProps) {
     const [roundNumber, setRoundNumber] = useState<number>(1)
+    const [loadingProgress, setLoadingProgress] = useState<number>(0)
     const [faces, setFaces] = useState({
         images: generateRound(),
         loading: true
@@ -38,11 +39,14 @@ export function GameView({setGameState}: ViewProps) {
 
     useEffect(() => {
         const fetchImages = async () => {
+            let loadedCount = 0
             const promises = faces.images.map(async (image) => {
                 const i = new Image()
                 i.src = image.url
                 await i.decode()
                 image.loaded = true
+                loadedCount++
+                setLoadingProgress(loadedCount / faces.images.length * 100)
             })
             await Promise.all(promises)
             setFaces({...faces, ...{loading: false}})
@@ -66,7 +70,7 @@ export function GameView({setGameState}: ViewProps) {
 
     return (
         <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
-            {faces.loading && <LoadingDialog/>}
+            {faces.loading && <LoadingDialog progress={loadingProgress}/>}
             <div className="grid grid-cols-3 gap-2">
                 {faces.images.map(({url, isSmiling, loaded}) => (
                     <Block

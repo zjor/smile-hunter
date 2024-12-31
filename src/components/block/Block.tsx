@@ -22,7 +22,7 @@ export function Block({url, correct, onClick}: BlockProps) {
         <div
             className={`block ${isShaking ? 'invalid' : ''}`}
             onClick={_onClick}>
-            <img src={url || questionImage}/>
+            <img src={url || questionImage} className="rounded-2xl"/>
         </div>
     )
 }
