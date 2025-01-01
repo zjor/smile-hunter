@@ -5,8 +5,7 @@ import {useEffect, useState} from "preact/hooks";
 import {range, shuffle} from "../utils/math.ts";
 import {LoadingDialog} from "../components/loading-dialog/LoadingDialog.tsx";
 
-const totalRounds = 3
-
+const totalRounds = 5
 
 function getFaceUrls(count: number, smiling: boolean): Array<string> {
     const urlPrefix = 'https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/faces'
@@ -14,9 +13,12 @@ function getFaceUrls(count: number, smiling: boolean): Array<string> {
     return Array.from({length: count}).map((_, i) => `${urlPrefix}/${dir}/${i + 1}.jpg`)
 }
 
+const NORMAL_FACES_COUNT = 153
+const SMILING_FACES_COUNT = 26
+
 const FACE_URLS = {
-    normal: getFaceUrls(23, false),
-    smiling: getFaceUrls(10, true),
+    normal: getFaceUrls(NORMAL_FACES_COUNT, false),
+    smiling: getFaceUrls(SMILING_FACES_COUNT, true),
 }
 
 interface Face {
@@ -25,12 +27,12 @@ interface Face {
 }
 
 function generateRound(): Face[] {
-    const normal = shuffle(range(0, 23)).slice(0, 8).map(ix => ({
+    const normal = shuffle(range(0, NORMAL_FACES_COUNT)).slice(0, 8).map(ix => ({
         url: FACE_URLS.normal[ix],
         isSmiling: false
     }))
     const smile = {
-        url: FACE_URLS.smiling[shuffle(range(0, 10))[0]],
+        url: FACE_URLS.smiling[shuffle(range(0, SMILING_FACES_COUNT))[0]],
         isSmiling: true
     }
     return shuffle([...normal, ...[smile]]) as Face[]
@@ -44,7 +46,7 @@ export function GameView({setGameState}: ViewProps) {
     const [roundNumber, setRoundNumber] = useState<number>(1)
     const [loadingProgress, setLoadingProgress] = useState<number>(0)
     const [game, setGame] = useState({
-        rounds: generateGame(3),
+        rounds: generateGame(totalRounds),
         loading: false
     });
 
@@ -56,7 +58,11 @@ export function GameView({setGameState}: ViewProps) {
             const promises = allFaces.map(async (face: Face) => {
                 const i = new Image()
                 i.src = face.url
-                await i.decode()
+                try {
+                    await i.decode()
+                } catch (e) {
+                    console.error(`Failed to decode image. URL: ${face.url}`, e)
+                }
                 loadedCount++
                 setLoadingProgress(loadedCount / allFaces.length * 100)
             })
