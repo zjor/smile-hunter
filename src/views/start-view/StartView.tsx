@@ -1,8 +1,11 @@
-import {GameState, ViewProps} from "../../app.tsx";
 import "./StartView.css"
+import {useAtom} from "jotai";
+import {ActiveView, State, stateAtom} from "../../state/state.ts";
 
 
-export function StartView({setGameState}: ViewProps) {
+export function StartView() {
+    const [state, setState] = useAtom<State>(stateAtom)
+
     return (
         <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
             <svg width="450" height="250">
@@ -19,7 +22,7 @@ export function StartView({setGameState}: ViewProps) {
                  src="https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/smile-hunter-splash.png"/>
             <button
                 className="bg-cyan-700 text-2xl text-white font-bold w-[256px]"
-                onClick={() => setGameState(GameState.STARTED)}>Start
+                onClick={() => setState({...state, ...{view: ActiveView.GAME_VIEW}})}>Start
             </button>
         </div>
     )

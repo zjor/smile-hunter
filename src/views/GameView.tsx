@@ -1,9 +1,10 @@
-import {GameState, ViewProps} from "../app.tsx";
 import {Block} from "../components/block/Block.tsx";
 import {PaginationDots} from "../components/pagination-dots/PaginationDots.tsx";
 import {useEffect, useState} from "preact/hooks";
 import {range, shuffle} from "../utils/math.ts";
 import {LoadingDialog} from "../components/loading-dialog/LoadingDialog.tsx";
+import {useAtom} from "jotai";
+import {ActiveView, State, stateAtom} from "../state/state.ts";
 
 const totalRounds = 5
 
@@ -42,7 +43,9 @@ function generateGame(rounds: number): Face[][] {
     return Array.from({length: rounds}).map(_ => generateRound());
 }
 
-export function GameView({setGameState}: ViewProps) {
+export function GameView() {
+    const [state, setState] = useAtom<State>(stateAtom)
+
     const [roundNumber, setRoundNumber] = useState<number>(1)
     const [loadingProgress, setLoadingProgress] = useState<number>(0)
     const [game, setGame] = useState({
@@ -75,7 +78,7 @@ export function GameView({setGameState}: ViewProps) {
     const _onClick = (correct: boolean) => {
         if (correct) {
             if (roundNumber == totalRounds) {
-                setGameState(GameState.FINISHED)
+                setState({...state, ...{view: ActiveView.RESULT_VIEW}})
             } else {
                 setRoundNumber(roundNumber + 1)
             }

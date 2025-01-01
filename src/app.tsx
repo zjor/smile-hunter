@@ -1,27 +1,27 @@
 import './app.css'
-import {useState} from "preact/hooks";
 import {StartView} from "./views/start-view/StartView.tsx";
 import {GameView} from "./views/GameView.tsx";
 import {ResultsView} from "./views/ResultsView.tsx";
+import {useAtom} from "jotai";
+import {ActiveView, State, stateAtom} from "./state/state.ts";
 
-export enum GameState {
-    NOT_STARTED,
-    STARTED,
-    FINISHED
-}
-
-export interface ViewProps {
-    setGameState: (state: GameState) => void
+function renderActiveView(view: ActiveView) {
+    switch (view) {
+        case ActiveView.START_VIEW:
+            return <StartView/>
+        case ActiveView.GAME_VIEW:
+            return <GameView/>
+        case ActiveView.RESULT_VIEW:
+            return <ResultsView/>
+    }
 }
 
 export function App() {
-    const [gameState, setGameState] = useState<GameState>(GameState.NOT_STARTED)
+    const [state, _] = useAtom<State>(stateAtom)
 
     return (
         <>
-            {gameState == GameState.NOT_STARTED && <StartView setGameState={setGameState}/>}
-            {gameState == GameState.STARTED && <GameView setGameState={setGameState}/>}
-            {gameState == GameState.FINISHED && <ResultsView setGameState={setGameState}/>}
+            {renderActiveView(state.view)}
         </>
     )
 }
