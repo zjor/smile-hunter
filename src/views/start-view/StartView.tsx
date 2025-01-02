@@ -1,10 +1,10 @@
 import "./StartView.css"
 import {useAtom} from "jotai";
-import {ActiveView, State, stateAtom} from "../../state/state.ts";
+import {ActiveView, activeViewAtom} from "../../state/state.ts";
 
 
 export function StartView() {
-    const [state, setState] = useAtom<State>(stateAtom)
+    const [_, setActiveView] = useAtom(activeViewAtom)
 
     return (
         <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
@@ -22,7 +22,7 @@ export function StartView() {
                  src="https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/smile-hunter-splash.png"/>
             <button
                 className="bg-cyan-700 text-2xl text-white font-bold w-[256px]"
-                onClick={() => setState({...state, ...{view: ActiveView.GAME_VIEW}})}>Start
+                onClick={() => setActiveView(ActiveView.GAME_VIEW)}>Start
             </button>
         </div>
     )

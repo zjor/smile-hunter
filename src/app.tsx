@@ -3,7 +3,7 @@ import {StartView} from "./views/start-view/StartView.tsx";
 import {GameView} from "./views/GameView.tsx";
 import {ResultsView} from "./views/ResultsView.tsx";
 import {useAtom} from "jotai";
-import {ActiveView, State, stateAtom} from "./state/state.ts";
+import {ActiveView, activeViewAtom} from "./state/state.ts";
 
 function renderActiveView(view: ActiveView) {
     switch (view) {
@@ -17,11 +17,11 @@ function renderActiveView(view: ActiveView) {
 }
 
 export function App() {
-    const [state, _] = useAtom<State>(stateAtom)
+    const [activeView, _] = useAtom(activeViewAtom)
 
     return (
         <>
-            {renderActiveView(state.view)}
+            {renderActiveView(activeView)}
         </>
     )
 }
