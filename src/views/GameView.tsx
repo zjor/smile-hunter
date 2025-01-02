@@ -4,7 +4,7 @@ import {useEffect, useState} from "preact/hooks";
 import {range, shuffle} from "../utils/math.ts";
 import {LoadingDialog} from "../components/loading-dialog/LoadingDialog.tsx";
 import {useAtom} from "jotai";
-import {ActiveView, activeViewAtom} from "../state/state.ts";
+import {ActiveView, activeViewAtom, gameStatsAtom} from "../state/state.ts";
 
 const totalRounds = 5
 
@@ -45,6 +45,7 @@ function generateGame(rounds: number): Face[][] {
 
 export function GameView() {
     const [_, setActiveView] = useAtom(activeViewAtom)
+    const [gameStats, setGameStats] = useAtom(gameStatsAtom)
 
     const [roundNumber, setRoundNumber] = useState<number>(1)
     const [loadingProgress, setLoadingProgress] = useState<number>(0)
@@ -71,6 +72,12 @@ export function GameView() {
             })
             await Promise.all(promises)
             setGame({...game, ...{loading: false}})
+            setGameStats({
+                totalFaces: allFaces.length,
+                erroneousSmiles: 0,
+                startTime: (new Date()).getTime(),
+                endTime: 0
+            })
         }
         fetchImages().catch(console.log)
     }, []);
@@ -78,10 +85,13 @@ export function GameView() {
     const _onClick = (correct: boolean) => {
         if (correct) {
             if (roundNumber == totalRounds) {
+                setGameStats({...gameStats, ...{endTime: (new Date().getTime())}})
                 setActiveView(ActiveView.RESULT_VIEW)
             } else {
                 setRoundNumber(roundNumber + 1)
             }
+        } else {
+            setGameStats({...gameStats, ...{erroneousSmiles: gameStats.erroneousSmiles + 1}})
         }
     }
 
