@@ -6,8 +6,6 @@ import {LoadingDialog} from "../components/loading-dialog/LoadingDialog.tsx";
 import {useAtom} from "jotai";
 import {ActiveView, activeViewAtom, gameStatsAtom} from "../state/state.ts";
 
-const totalRounds = 5
-
 function getFaceUrls(count: number, smiling: boolean): Array<string> {
     const urlPrefix = 'https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/faces'
     const dir = smiling ? 'smiling' : 'normal'
@@ -50,7 +48,7 @@ export function GameView() {
     const [roundNumber, setRoundNumber] = useState<number>(1)
     const [loadingProgress, setLoadingProgress] = useState<number>(0)
     const [game, setGame] = useState({
-        rounds: generateGame(totalRounds),
+        rounds: generateGame(gameStats.numberOfRounds),
         loading: false
     });
 
@@ -73,6 +71,7 @@ export function GameView() {
             await Promise.all(promises)
             setGame({...game, ...{loading: false}})
             setGameStats({
+                numberOfRounds: gameStats.numberOfRounds,
                 totalFaces: allFaces.length,
                 erroneousSmiles: 0,
                 startTime: (new Date()).getTime(),
@@ -84,7 +83,7 @@ export function GameView() {
 
     const _onClick = (correct: boolean) => {
         if (correct) {
-            if (roundNumber == totalRounds) {
+            if (roundNumber == gameStats.numberOfRounds) {
                 setGameStats({...gameStats, ...{endTime: (new Date().getTime())}})
                 setActiveView(ActiveView.RESULT_VIEW)
             } else {
@@ -108,7 +107,7 @@ export function GameView() {
                 ))}
             </div>
             <div className="pt-10">
-                <PaginationDots total={totalRounds} filled={roundNumber}/>
+                <PaginationDots total={gameStats.numberOfRounds} filled={roundNumber}/>
             </div>
         </div>
     )

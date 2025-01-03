@@ -7,7 +7,7 @@ export function StartView() {
     const [_, setActiveView] = useAtom(activeViewAtom)
 
     return (
-        <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
+        <div className="screen">
             <svg width="450" height="250">
                 <defs>
                     <path id="curve" d="M 50,200 A 200,200 0 0,1 400,250"/>
@@ -22,7 +22,7 @@ export function StartView() {
                  src="https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/smile-hunter-splash.png"/>
             <button
                 className="bg-cyan-700 text-2xl text-white font-bold w-[256px]"
-                onClick={() => setActiveView(ActiveView.GAME_VIEW)}>Start
+                onClick={() => setActiveView(ActiveView.CONFIGURE_GAME_VIEW)}>New Game
             </button>
         </div>
     )

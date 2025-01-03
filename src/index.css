@@ -70,3 +70,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.screen {
+  @apply w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100;
+}
+
+.default-btn {
+  @apply bg-cyan-700 text-2xl text-white font-bold w-[256px]
+}
