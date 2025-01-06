@@ -1,27 +1,18 @@
-import "./StartView.css"
 import {useAtom} from "jotai";
 import {ActiveView, activeViewAtom} from "../../state/state.ts";
-
+import WelcomeLogo from "../../assets/welcome-logo.svg"
+import "./StartView.css"
 
 export function StartView() {
     const [_, setActiveView] = useAtom(activeViewAtom)
 
     return (
         <div className="screen">
-            <svg width="450" height="250">
-                <defs>
-                    <path id="curve" d="M 50,200 A 200,200 0 0,1 400,250"/>
-                </defs>
-                <text fill="black" font-size="20">
-                    <textPath href="#curve" className="title">
-                        The Smile Hunter
-                    </textPath>
-                </text>
-            </svg>
-            <img className="w-[256] h-[256px] mb-[48px] rounded-2xl"
-                 src="https://raw.githubusercontent.com/zjor/assets/refs/heads/master/smile-hunter/smile-hunter-splash.png"/>
+            <div className="font-baloo font-bold text-6xl self-start ml-16">The Smile<br/>Hunter</div>
+            <img className="self-end"
+                 src={WelcomeLogo}/>
             <button
-                className="bg-cyan-700 text-2xl text-white font-bold w-[256px]"
+                className="default-btn"
                 onClick={() => setActiveView(ActiveView.CONFIGURE_GAME_VIEW)}>New Game
             </button>
         </div>

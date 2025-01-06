@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        chewy: ['Chewy'], // Add your font here
+        baloo: ['"Baloo 2"'], // Add your font here
       },
     },
   },
