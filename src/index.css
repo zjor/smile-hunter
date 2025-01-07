@@ -41,7 +41,7 @@ button {
 }
 
 .screen {
-  @apply w-full h-[100vh] flex flex-col items-center justify-center;
+  @apply w-full h-[100vh] flex flex-col items-center justify-center sm:w-[320px];
 }
 
 .default-btn {
