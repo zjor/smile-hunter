@@ -12,11 +12,15 @@ export function ConfigureGameView() {
 
     return (
         <div className="screen">
-            <div className="font-bold pb-3">Select number of rounds</div>
-            <Toggle onSelected={_onNumberOfRoundsSelected}/>
-            <button className="nb-btn mt-6"
-                    onClick={() => setActiveView(ActiveView.GAME_VIEW)}>Start
-            </button>
+            <div className="flex flex-col flex-grow justify-center">
+                <div className="font-bold pb-3">Select number of rounds</div>
+                <Toggle onSelected={_onNumberOfRoundsSelected}/>
+            </div>
+            <div className="w-full flex flex-col justify-between min-h-[150px]">
+                <button className="nb-btn self-center"
+                        onClick={() => setActiveView(ActiveView.GAME_VIEW)}>Start
+                </button>
+            </div>
         </div>
     )
 }

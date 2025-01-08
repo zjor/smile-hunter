@@ -1,8 +1,10 @@
 import {useAtom} from "jotai";
 import {ActiveView, activeViewAtom} from "../../state/state.ts";
-import WelcomeLogo from "../../assets/welcome-logo.svg"
-import "./StartView.css"
+
 import {useEffect, useState} from "preact/hooks";
+import WelcomeLogo from "../../assets/welcome-logo.svg"
+
+import "./StartView.css"
 
 export function StartView() {
     const [_, setActiveView] = useAtom(activeViewAtom)
@@ -38,7 +40,7 @@ export function StartView() {
             </div>
 
             <div className="flex flex-row w-full min-h-[150px]">
-                <div className="self-end font-baloo font-bold text-5xl self-start ml-2">
+                <div className="self-end font-baloo font-bold text-5xl self-start ml-6">
                     The Smile<br/>Hunter
                 </div>
             </div>
@@ -47,9 +49,9 @@ export function StartView() {
                 <img className="self-center h-[320px]"
                      src={WelcomeLogo}/>
             </div>
-            <div className="w-full flex flex-row justify-center min-h-[100px]">
+            <div className="w-full flex flex-col justify-between min-h-[150px]">
                 <button
-                    className="nb-btn self-start"
+                    className="nb-btn self-center"
                     onClick={() => setActiveView(ActiveView.CONFIGURE_GAME_VIEW)}>New Game
                 </button>
             </div>

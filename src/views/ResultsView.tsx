@@ -7,14 +7,18 @@ export function ResultsView() {
     const time = ((stats.endTime - stats.startTime) / 1000).toFixed(2)
     const accuracy = ((stats.totalFaces - stats.erroneousSmiles) / stats.totalFaces * 100).toFixed(1)
     return (
-        <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100 gap-3">
-            <div className="text-3xl mb-[48px]">Happy End!</div>
-            <div>Total time: <b>{time}</b> seconds</div>
-            <div>Accuracy: <b>{accuracy}%</b></div>
-            <button
-                className="nb-btn"
-                onClick={() => setActiveView(ActiveView.START_VIEW)}>Play again
-            </button>
+        <div className="screen">
+            <div className="flex flex-col flex-grow justify-center">
+                <div className="text-3xl mb-[48px]">Happy End!</div>
+                <div>Total time: <b>{time}</b> seconds</div>
+                <div>Accuracy: <b>{accuracy}%</b></div>
+            </div>
+            <div className="w-full flex flex-col justify-between min-h-[150px]">
+                <button
+                    className="nb-btn self-center"
+                    onClick={() => setActiveView(ActiveView.START_VIEW)}>Play again
+                </button>
+            </div>
         </div>
     )
 }

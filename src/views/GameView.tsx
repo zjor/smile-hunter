@@ -95,7 +95,7 @@ export function GameView() {
     }
 
     return (
-        <div className="w-full h-[100vh] flex flex-col items-center justify-center bg-amber-100">
+        <div className="screen">
             {game.loading && <LoadingDialog progress={loadingProgress}/>}
             <div className="grid grid-cols-3 gap-2">
                 {game.rounds[roundNumber - 1].map(({url, isSmiling}) => (

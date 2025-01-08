@@ -18,7 +18,7 @@ export interface GameStats {
 export const activeViewAtom = atom<ActiveView>(ActiveView.START_VIEW)
 
 export const gameStatsAtom = atom<GameStats>({
-    numberOfRounds: 10,
+    numberOfRounds: 5,
     startTime: 0,
     endTime: 0,
     totalFaces: 0,
