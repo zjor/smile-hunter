@@ -12,7 +12,7 @@ export function ResultsView() {
             <div>Total time: <b>{time}</b> seconds</div>
             <div>Accuracy: <b>{accuracy}%</b></div>
             <button
-                className="default-btn"
+                className="nb-btn"
                 onClick={() => setActiveView(ActiveView.START_VIEW)}>Play again
             </button>
         </div>

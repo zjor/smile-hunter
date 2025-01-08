@@ -14,7 +14,7 @@ export function ConfigureGameView() {
         <div className="screen">
             <div className="font-bold pb-3">Select number of rounds</div>
             <Toggle onSelected={_onNumberOfRoundsSelected}/>
-            <button className="default-btn mt-6"
+            <button className="nb-btn mt-6"
                     onClick={() => setActiveView(ActiveView.GAME_VIEW)}>Start
             </button>
         </div>

@@ -3,48 +3,72 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #4C3425;
-  background-color: #FFBD54;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #4C3425;
+    background-color: #FFBD54;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
 
 .screen {
-  @apply w-full h-[100vh] flex flex-col items-center justify-center sm:w-[320px];
+    @apply w-full h-[100vh] flex flex-col items-center justify-center sm:w-[320px];
 }
 
 .default-btn {
-  @apply rounded-2xl text-2xl font-bold w-[256px] shadow-xl;
-  background-color:  #FFBD54;
+    @apply rounded-2xl text-2xl font-bold w-[256px] shadow-xl;
+    background-color: #FFBD54;
+}
+
+.nb-btn {
+    background-color: #cf6329; /* Bright yellow background */
+    color: #000000; /* Black text */
+    border: 4px solid #000000; /* Thick black border */
+    box-shadow: 6px 6px 0px 0px #000000; /* Hard shadow for a raw look */
+    font-family: "Arial Black", sans-serif; /* Bold sans-serif font */
+    font-size: 18px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.nb-btn:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0px 0px #000000;
+}
+
+.nb-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0px 0px #000000;
 }

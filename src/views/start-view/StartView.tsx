@@ -37,15 +37,22 @@ export function StartView() {
                 <div>Height: {windowSize.height}</div>
             </div>
 
-            <div className="flex flex-row w-full">
-                <div className="font-baloo font-bold text-5xl self-start ml-2">The Smile<br/>Hunter</div>
+            <div className="flex flex-row w-full min-h-[150px]">
+                <div className="self-end font-baloo font-bold text-5xl self-start ml-2">
+                    The Smile<br/>Hunter
+                </div>
             </div>
-            <img className="self-end h-[320px]"
-                 src={WelcomeLogo}/>
-            <button
-                className="default-btn"
-                onClick={() => setActiveView(ActiveView.CONFIGURE_GAME_VIEW)}>New Game
-            </button>
+
+            <div className="w-full flex flex-row justify-end flex-grow">
+                <img className="self-center h-[320px]"
+                     src={WelcomeLogo}/>
+            </div>
+            <div className="w-full flex flex-row justify-center min-h-[100px]">
+                <button
+                    className="nb-btn self-start"
+                    onClick={() => setActiveView(ActiveView.CONFIGURE_GAME_VIEW)}>New Game
+                </button>
+            </div>
         </div>
     )
 }
