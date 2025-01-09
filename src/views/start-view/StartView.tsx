@@ -33,7 +33,7 @@ export function StartView() {
 
 
     return (
-        <div className="screen">
+        <div className="screen !bg-[#FFBD54]">
             <div className="absolute top-0 right-0 bg-white hidden">
                 <div>Width: {windowSize.width}</div>
                 <div>Height: {windowSize.height}</div>

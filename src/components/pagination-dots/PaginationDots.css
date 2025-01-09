@@ -2,6 +2,10 @@
     @apply w-[16px] h-[16px] rounded-full border-2 border-red-500;
 }
 
+.dot-small {
+    @apply w-[8px] h-[8px] rounded-full border-2 border-red-500;
+}
+
 .filled {
     @apply bg-red-500
 }

@@ -6,16 +6,20 @@ interface ChipProps {
     value: number
 }
 
-export interface OnToggleSelected {
+export interface ToggleProps {
+    values: Array<number>
+    selectedValue: number
     onSelected: (value: number) => void
 }
 
-export function Toggle({onSelected}: OnToggleSelected) {
-    const [state, setState] = useState<Array<ChipProps>>([
-        {pressed: true, value: 5},
-        {pressed: false, value: 10},
-        {pressed: false, value: 15}
-    ])
+export function Toggle({values, selectedValue, onSelected}: ToggleProps) {
+    const initialState: Array<ChipProps> = values.map(v => {
+        return {
+            value: v,
+            pressed: v == selectedValue
+        }
+    })
+    const [state, setState] = useState<Array<ChipProps>>(initialState)
 
     const _onClick = (ix: number) => {
         state.forEach((_, i) => state[i].pressed = false)
@@ -25,11 +29,11 @@ export function Toggle({onSelected}: OnToggleSelected) {
     }
 
     return (
-        <div className="flex flex-row bg-amber-400 rounded-2xl overflow-hidden">
+        <div className="flex flex-row gap-4">
             {state.map(({pressed, value}, i) => (
-                <div
+                <button
                     onClick={() => _onClick(i)}
-                    className={`chip ${pressed ? 'active' : ''}`}>{value}</div>
+                    className={`toggle-btn ${pressed ? 'active' : ''}`}>{value}</button>
             ))}
         </div>
     )

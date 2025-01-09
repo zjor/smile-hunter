@@ -11,7 +11,7 @@ export function PaginationDots({total, filled}: PaginationDotsProps) {
     return (
         <div className="flex flex-row gap-2">
             {dots.map(dot => (
-                <div className={`dot ${dot ? 'filled' : ''}`}></div>
+                <div className={`${total > 10 ? 'dot-small' : 'dot'} ${dot ? 'filled' : ''}`}></div>
             ))}
         </div>
     )
