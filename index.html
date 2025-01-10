@@ -42,5 +42,12 @@
 <body>
     <div id="app" class="w-full h-[100vh] flex flex-col items-center"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(() => console.log('Service Worker registered successfully.'))
+                .catch((error) => console.log('Service Worker registration failed:', error));
+        }
+    </script>
 </body>
 </html>
