@@ -21,16 +21,11 @@ export function StartView() {
                 height: window.innerHeight,
             });
         };
-
-        // Subscribe to the resize event
         window.addEventListener('resize', handleResize);
-
-        // Cleanup function to remove the event listener
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []); // Empty dependency array ensures this runs only once on mount
-
+    }, []);
 
     return (
         <div className="screen !bg-[#FFBD54]">

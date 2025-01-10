@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "jotai": "^2.11.0",
-    "preact": "^10.25.3"
+    "preact": "^10.25.3",
+    "recharts": "^2.15.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.9.3",

@@ -1,4 +1,4 @@
-const MAX_LENGTH = 10
+export const MAX_LENGTH = 10
 
 function _storeItem(key: string, value: number) {
     const stored: string | null = localStorage.getItem(key)
@@ -16,12 +16,12 @@ export function storeResults(nOfRounds: number, time: number, accuracy: number) 
     _storeItem(`${nOfRounds}:accuracy`, accuracy)
 }
 
-interface ResultsType {
+export interface ResultsType {
     times: Array<number>
     accuracies: Array<number>
 }
 
-export function getResults(nOfRounds: number): ResultsType {
+export function loadResults(nOfRounds: number): ResultsType {
     return {
         times: JSON.parse(localStorage.getItem(`${nOfRounds}:time`) || '[]'),
         accuracies: JSON.parse(localStorage.getItem(`${nOfRounds}:accuracy`) || '[]'),
