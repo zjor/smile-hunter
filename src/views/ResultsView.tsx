@@ -34,12 +34,16 @@ export function ResultsView() {
 
     return (
         <div className="screen">
-            <div className="flex flex-col flex-grow justify-center items-center">
-                <div className="text-3xl mb-[48px]">Happy End!</div>
-                <div>Total time: <b>{time}</b> seconds</div>
-                <div>Accuracy: <b>{accuracy}%</b></div>
+            <div className="w-full flex flex-col flex-grow justify-center items-center">
+                <div className="font-baloo font-bold text-3xl m-2">Congratulations!</div>
+                <div className="grid grid-cols-2">
+                    <div className="text-right mr-2">Total time:</div>
+                    <div><b>{time}</b> seconds</div>
+                    <div className="text-right mr-2">Accuracy:</div>
+                    <div><b>{accuracy}%</b></div>
+                </div>
 
-                <div className="self-start pt-4 pl-2 font-bold">Time history</div>
+                <div className="self-start pt-4 pl-4 font-bold">Time history</div>
                 <div className="pt-2 pb-2">
                     <LineChart width={300} height={150} data={timeHistory}>
                         <Line type="monotone" dataKey="value" stroke="#FF8640" strokeWidth={3}/>
@@ -51,7 +55,7 @@ export function ResultsView() {
                     </LineChart>
                 </div>
 
-                <div className="self-start pt-2 pl-2 font-bold">Accuracy history</div>
+                <div className="self-start pt-2 pl-4 font-bold">Accuracy history</div>
                 <div className="pt-2 pb-4">
                     <LineChart width={300} height={100} data={accuracyHistory}>
                         <Line type="monotone" dataKey="value" stroke="#FF8640" strokeWidth={3}/>
