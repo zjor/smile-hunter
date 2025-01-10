@@ -1,11 +1,18 @@
 import {useAtom} from "jotai";
 import {ActiveView, activeViewAtom, gameStatsAtom} from "../state/state.ts";
+import {useEffect} from "preact/hooks";
+import {storeResults} from "../store/statsStore.ts";
 
 export function ResultsView() {
     const [_, setActiveView] = useAtom(activeViewAtom)
     const [stats, __] = useAtom(gameStatsAtom)
     const time = ((stats.endTime - stats.startTime) / 1000).toFixed(2)
     const accuracy = ((stats.totalFaces - stats.erroneousSmiles) / stats.totalFaces * 100).toFixed(1)
+
+    useEffect(() => {
+        storeResults(stats.numberOfRounds, parseFloat(time), parseFloat(accuracy))
+    }, [])
+
     return (
         <div className="screen">
             <div className="flex flex-col flex-grow justify-center">
