@@ -3,6 +3,7 @@ import {ActiveView, activeViewAtom, gameStatsAtom} from "../state/state.ts"
 import {useEffect, useState} from "preact/hooks"
 import {loadResults, MAX_LENGTH, storeResults} from "../store/statsStore.ts"
 import {LineChart, Line, CartesianGrid, YAxis} from "recharts"
+import BuyMeACoffeeIcon from "../assets/buymeacoffee.svg"
 
 export function ResultsView() {
     const [_, setActiveView] = useAtom(activeViewAtom)
@@ -75,6 +76,15 @@ export function ResultsView() {
                     onClick={() => setActiveView(ActiveView.START_VIEW)}>Play again
                 </button>
             </div>
+            <footer className="w-full pb-4 flex justify-center items-center gap-1 text-sm">
+                <a href="https://buymeacoffee.com/zjor"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="flex items-center gap-1 font-semibold hover:underline">
+                    <img src={BuyMeACoffeeIcon} alt="Buy Me a Coffee" className="w-5 h-5"/>
+                    Buy Me a Coffee
+                </a>
+            </footer>
         </div>
     )
 }

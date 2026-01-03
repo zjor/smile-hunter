@@ -3,6 +3,7 @@ import {ActiveView, activeViewAtom} from "../../state/state.ts";
 
 import {useEffect, useState} from "preact/hooks";
 import WelcomeLogo from "../../assets/welcome-logo.svg"
+import InstagramIcon from "../../assets/instagram.svg"
 
 import "./StartView.css"
 
@@ -50,6 +51,16 @@ export function StartView() {
                     onClick={() => setActiveView(ActiveView.CONFIGURE_GAME_VIEW)}>New Game
                 </button>
             </div>
+            <footer className="w-full pb-4 flex justify-center items-center gap-1 text-sm">
+                <span>Created by</span>
+                <a href="https://www.instagram.com/sergey.royz"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="flex items-center gap-1 font-semibold hover:underline">
+                    <img src={InstagramIcon} alt="Instagram" className="w-4 h-4"/>
+                    Sergey Royz
+                </a>
+            </footer>
         </div>
     )
 }
