@@ -50,7 +50,7 @@ export function ResultsView() {
                         <CartesianGrid stroke="#FF8640" strokeDasharray="5 5"/>
                         <YAxis width={30}
                                tickCount={50}
-                               tickFormatter={(value: number) => Math.round(value)}
+                               tickFormatter={(value: number) => String(Math.round(value))}
                                stroke="#FF8640"/>
                     </LineChart>
                 </div>
@@ -62,7 +62,7 @@ export function ResultsView() {
                         <CartesianGrid stroke="#FF8640" strokeDasharray="5 5"/>
                         <YAxis width={30}
                                tickCount={3}
-                               tickFormatter={(value: number) => Math.round(value)}
+                               tickFormatter={(value: number) => String(Math.round(value))}
                                stroke="#FF8640"/>
                     </LineChart>
                 </div>
